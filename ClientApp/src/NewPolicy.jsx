@@ -22,11 +22,11 @@ export function NewPolicy() {
   }
 
   function handlePremium(event) {
-    const value = '1200'
+    const value = event.target.value
     const fieldName = event.target.name
     const updatedPolicy = {
       ...newPolicy,
-      [fieldName]: parseInt(value),
+      [fieldName]: Number(value),
     }
     setNewPolicy(updatedPolicy)
   }
@@ -38,7 +38,7 @@ export function NewPolicy() {
   async function handleFormSubmit(event) {
     event.preventDefault()
 
-    const response = await fetch('/api/Users/Policies', {
+    const response = await fetch('/api/Policies', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newPolicy),
@@ -76,13 +76,15 @@ export function NewPolicy() {
                   </p>
                   <select
                     onChange={handleStringFieldChange}
-                    name="HO-type"
+                    name="type"
+                    value={newPolicy.type}
                     id="type"
                   >
                     <optgroup label="Pick your policy">
+                      <option></option>
                       <option value="HO-3">HO-3(Basic)</option>
                       <option value="HO-5">HO-5(Advanced)</option>
-                      <option value="HO-8">HO-7(Premium)</option>
+                      <option value="HO-7">HO-7(Premium)</option>
                     </optgroup>
                   </select>
 
@@ -92,7 +94,7 @@ export function NewPolicy() {
                       type="text"
                       name="premium"
                       value={newPolicy.premium}
-                      onSubmit={handlePremium}
+                      onChange={handlePremium}
                     />
                   </p>
                   <p>

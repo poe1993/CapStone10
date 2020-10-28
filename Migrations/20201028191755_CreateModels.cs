@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CapStone10.Migrations
 {
-    public partial class AddUsers : Migration
+    public partial class CreateModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

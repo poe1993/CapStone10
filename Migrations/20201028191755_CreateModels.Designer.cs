@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CapStone10.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20201028005147_AddUsers")]
-    partial class AddUsers
+    [Migration("20201028191755_CreateModels")]
+    partial class CreateModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
