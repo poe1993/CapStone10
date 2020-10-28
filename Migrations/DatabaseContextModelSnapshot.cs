@@ -44,8 +44,6 @@ namespace CapStone10.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Policies");
                 });
 
@@ -77,15 +75,6 @@ namespace CapStone10.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("CapStone10.Models.Policy", b =>
-                {
-                    b.HasOne("CapStone10.Models.User", null)
-                        .WithMany("Policies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

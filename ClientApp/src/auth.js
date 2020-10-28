@@ -52,6 +52,7 @@ export const getUser = () => {
   const auth = authFromStorage()
   return auth.user
 }
+
 // Removes the authentication data, effectively "forgetting" the
 // session information and logging the user out.
 export const logout = () => {

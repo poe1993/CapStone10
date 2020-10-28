@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CapStone10.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20201023083639_AddUserEmailIndex")]
-    partial class AddUserEmailIndex
+    [Migration("20201028005147_AddUsers")]
+    partial class AddUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,8 +46,6 @@ namespace CapStone10.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Policies");
                 });
 
@@ -79,15 +77,6 @@ namespace CapStone10.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("CapStone10.Models.Policy", b =>
-                {
-                    b.HasOne("CapStone10.Models.User", null)
-                        .WithMany("Policies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

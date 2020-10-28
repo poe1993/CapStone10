@@ -85,6 +85,7 @@ export function NewPolicy() {
                       <option value="HO-8">HO-7(Premium)</option>
                     </optgroup>
                   </select>
+
                   <p className="form-input">
                     <label htmlFor="premium">Estimated Home Value $:</label>
                     <input
