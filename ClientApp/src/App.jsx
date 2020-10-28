@@ -8,8 +8,8 @@ import { ViewPolicy } from './ViewPolicy'
 import { NewPolicy } from './NewPolicy'
 import { UpdatePolicy } from './UpdatePolicy'
 import { DeletePolicy } from './DeletePolicy'
-import { UserProfile } from './UserProfile'
 import { EditUserProfile } from './EditUserProfile'
+import { UserProfile } from './UserProfile'
 
 export function App() {
   return (

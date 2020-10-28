@@ -88,6 +88,7 @@ export function SignUp() {
                       required
                       autoFocus
                       value={newUser.email}
+                      onChange={handleStringFieldChange}
                     />
                   </div>
                   <div className="form-label-group">

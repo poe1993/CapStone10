@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getUserId } from './auth'
+import { Header } from './Header'
 
 export function NewPolicy() {
   const history = useHistory()
@@ -57,6 +58,7 @@ export function NewPolicy() {
 
   return (
     <body>
+      <Header />
       <div className="container">
         <div className="row">
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -65,40 +67,53 @@ export function NewPolicy() {
                 <h5 className="card-title text-center">New Policy Form</h5>
                 <form onSubmit={handleFormSubmit}>
                   {errorMessage && <p>{errorMessage}</p>}
-                  <p className="form-input">
-                    <label htmlFor="location">Location</label>
+                  <div className="form-label-group">
                     <input
-                      type="text"
+                      type="location"
+                      id="inputLocation"
+                      placeholder="Location"
+                      className="form-control"
+                      required
+                      autoFocus
                       name="location"
                       value={newPolicy.location}
                       onChange={handleStringFieldChange}
                     />
-                  </p>
+                  </div>
                   <select
-                    onChange={handleStringFieldChange}
+                    onInput={handleStringFieldChange}
+                    className="select"
                     name="type"
-                    value={newPolicy.type}
                     id="type"
                   >
-                    <optgroup label="Pick your policy">
-                      <option></option>
+                    <optgroup
+                      label="Pick your policy"
+                      onChange={handleStringFieldChange}
+                    >
                       <option value="HO-3">HO-3(Basic)</option>
                       <option value="HO-5">HO-5(Advanced)</option>
-                      <option value="HO-7">HO-7(Premium)</option>
+                      <option value="HO-8">HO-7(Premium)</option>
                     </optgroup>
                   </select>
-
-                  <p className="form-input">
-                    <label htmlFor="premium">Estimated Home Value $:</label>
+                  <div className="form-label-group">
                     <input
-                      type="text"
+                      type="premium"
                       name="premium"
+                      placeholder="Estimated Home Value $"
+                      className="form-control"
+                      required
+                      autoFocus
                       value={newPolicy.premium}
                       onChange={handlePremium}
                     />
-                  </p>
+                  </div>
                   <p>
-                    <input type="submit" value="Submit" />
+                    <button
+                      className="btn btn-lg btn-google btn-block text-uppercase"
+                      type="submit"
+                    >
+                      Get Estimate
+                    </button>
                   </p>
                 </form>
               </div>

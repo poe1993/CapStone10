@@ -51,7 +51,7 @@ export function SignIn() {
                   {errorMessage && <p>{errorMessage}</p>}
                   <div className="form-label-group">
                     <input
-                      type="email"
+                      type="e"
                       className="form-control"
                       placeholder="Email address"
                       required

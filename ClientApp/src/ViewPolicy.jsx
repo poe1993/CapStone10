@@ -5,7 +5,8 @@ import format from 'date-fns/format'
 
 export function ViewPolicy() {
   const dateFormat = `EEEE, MMMM do, yyyy 'at' h:mm aaa`
-  const user = getUserId()
+  const user = getUser()
+
   const [policies, setPolicies] = useState([])
 
   useEffect(function () {
