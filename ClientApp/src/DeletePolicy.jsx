@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export function DeletePolicy() {
+  const [policies, setPolicies] = useState([])
+
+  useEffect(function () {
+    async function loadPolicies() {
+      const response = await fetch('/api/policies')
+      const json = await response.json()
+      setPolicies(json)
+    }
+    loadPolicies()
+  }, [])
+
   return (
     <body>
       <div className="container">

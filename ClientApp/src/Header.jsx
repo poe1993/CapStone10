@@ -20,6 +20,13 @@ export function Header() {
             </li>
           </ul>
         </nav>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </ul>
+        </nav>
       </header>
     </div>
   )

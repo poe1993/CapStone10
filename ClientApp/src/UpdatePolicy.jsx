@@ -10,6 +10,7 @@ export function UpdatePolicy() {
               <div className="card-body">
                 <h5 className="card-title text-center">
                   Which Policy would you like to update?
+                  <form></form>
                 </h5>
               </div>
             </div>

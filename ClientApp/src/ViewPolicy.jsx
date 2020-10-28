@@ -12,7 +12,6 @@ export function ViewPolicy() {
     async function loadPolicies() {
       const response = await fetch('/api/policies')
       const json = await response.json()
-      console.log(json)
       setPolicies(json)
     }
     loadPolicies()
@@ -28,7 +27,7 @@ export function ViewPolicy() {
                 <h5 className="card-title text-center">Your Policies</h5>
                 <ul>
                   {policies.map((policy) => (
-                    <li>
+                    <li key={policy}>
                       Policy {policy.location}
                       <ul>Type: {policy.type}</ul>
                       <ul>Premium: {policy.premium}</ul>
