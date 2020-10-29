@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { getUser, isLoggedIn } from './auth'
+import { authHeader, getUser } from './auth'
 import { Header } from './Header'
 
 export function UpdatePolicyForm() {
@@ -8,11 +8,23 @@ export function UpdatePolicyForm() {
   const user = getUser()
   const [errorMessage, setErrorMessage] = useState()
   const [policy, setPolicy] = useState({
-    location: '',
-    type: '',
+    location: user.location,
+    type: user.type,
     premium: 0.0,
-    userId: user.id,
+    userId: user.Id,
   })
+
+  async function loadPolicy(userId) {
+    const response = await fetch(`/api/policies/${userId}`, {
+      headers: { 'content-type': 'application/json', ...authHeader() },
+    })
+    const json = await response.json()
+    setPolicy(json)
+  }
+
+  useEffect(function () {
+    loadPolicy()
+  }, [])
 
   function handleStringFieldChange(event) {
     const value = event.target.value
@@ -34,9 +46,9 @@ export function UpdatePolicyForm() {
   async function handleFormSubmit(event) {
     event.preventDefault()
 
-    const response = await fetch(`/api/Policies/${user.id}`, {
+    const response = await fetch(`/api/Policies/${policy.userId}`, {
       method: 'PUT',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(policy),
     })
 
@@ -58,59 +70,57 @@ export function UpdatePolicyForm() {
           <div className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Update Policy Form</h5>
-              {isLoggedIn() && (
-                <form onSubmit={handleFormSubmit}>
-                  {errorMessage && <p>{errorMessage}</p>}
-                  <div className="form-label-group">
-                    <input
-                      type="location"
-                      id="inputLocation"
-                      placeholder="Location"
-                      className="form-control"
-                      required
-                      autoFocus
-                      name="location"
-                      value={policy.location}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <select
-                    onInput={handleStringFieldChange}
-                    className="select"
-                    name="type"
-                    id="type"
+              <form onSubmit={handleFormSubmit}>
+                {errorMessage && <p>{errorMessage}</p>}
+                <div className="form-label-group">
+                  <input
+                    type="location"
+                    id="inputLocation"
+                    placeholder="Location"
+                    className="form-control"
+                    required
+                    autoFocus
+                    name="location"
+                    value={policy.location}
+                    onChange={handleStringFieldChange}
+                  />
+                </div>
+                <select
+                  onInput={handleStringFieldChange}
+                  className="select"
+                  name="type"
+                  id="type"
+                >
+                  <optgroup
+                    label="Pick your policy"
+                    onChange={handleStringFieldChange}
                   >
-                    <optgroup
-                      label="Pick your policy"
-                      onChange={handleStringFieldChange}
-                    >
-                      <option value="HO-3">HO-3(Basic)</option>
-                      <option value="HO-5">HO-5(Advanced)</option>
-                      <option value="HO-8">HO-7(Premium)</option>
-                    </optgroup>
-                  </select>
-                  <div className="form-label-group">
-                    <input
-                      type="premium"
-                      name="premium"
-                      placeholder="Estimated Home Value $"
-                      className="form-control"
-                      required
-                      autoFocus
-                      value={policy.premium}
-                      onChange={handlePremium}
-                    />
-                  </div>
-                  <p>
-                    <button
-                      className="btn btn-lg btn-google btn-block text-uppercase"
-                      type="submit"
-                    >
-                      Update
-                    </button>
-                  </p>
-                </form>
-              )}
+                    <option value="HO-3">HO-3(Basic)</option>
+                    <option value="HO-5">HO-5(Advanced)</option>
+                    <option value="HO-8">HO-7(Premium)</option>
+                  </optgroup>
+                </select>
+                <div className="form-label-group">
+                  <input
+                    type="premium"
+                    name="premium"
+                    placeholder="Estimated Home Value $"
+                    className="form-control"
+                    required
+                    autoFocus
+                    value={policy.premium}
+                    onChange={handlePremium}
+                  />
+                </div>
+                <p>
+                  <button
+                    className="btn btn-lg btn-google btn-block text-uppercase"
+                    type="submit"
+                  >
+                    Update
+                  </button>
+                </p>
+              </form>
             </div>
           </div>
         </div>

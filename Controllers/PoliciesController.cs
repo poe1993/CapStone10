@@ -55,6 +55,7 @@ namespace CapStone10.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
             // Find the policy in the database using `FindAsync` to look it up by id
@@ -157,6 +158,7 @@ namespace CapStone10.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeletePolicy(int id)
         {
             // Find this policy by looking for the specific id
