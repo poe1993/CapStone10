@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getUser, getUserId, isLoggedIn, logout } from './auth'
+import { authHeader, getUser, getUserId, isLoggedIn, logout } from './auth'
 import { Header } from './Header'
 import format from 'date-fns/format'
 
@@ -13,9 +13,15 @@ export function ViewPolicy() {
     window.location.assign('/home')
   }
 
+  function fixer(x) {
+    return Number.parseFloat(x).toFixed(2)
+  }
+
   useEffect(function () {
     async function loadPolicies() {
-      const response = await fetch('/api/policies')
+      const response = await fetch('/api/policies', {
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
       const json = await response.json()
       setPolicies(json)
     }
@@ -31,29 +37,33 @@ export function ViewPolicy() {
               <div className="card-body">
                 <h5 className="card-title text-center">Your Policies</h5>
                 <hr className="my-4" />
-                <div>
-                  <ul>
-                    {policies.map((policy) => (
-                      <li className="btn-policy" key={policy.location}>
-                        Policy({policy.id}) {policy.location}:
-                        <ul key={policy.type}>Type: {policy.type}</ul>
-                        <ul key={policy.premium}>Premium: {policy.premium}</ul>
-                        <ul key={policy.coverage}>
-                          Coverage:
-                          {format(new Date(policy.coverage), dateFormat)}
-                        </ul>
-                        <hr className="my-4" />
-                      </li>
-                    ))}
-                  </ul>
-                  <hr className="my-4" />
-                  <button
-                    className="btn btn-lg btn-google btn-block text-uppercase"
-                    onClick={HomeButton}
-                  >
-                    Return
-                  </button>
-                </div>
+                {isLoggedIn() && (
+                  <div>
+                    <ul>
+                      {policies.map((policy) => (
+                        <li className="btn-policy" key={policy.location}>
+                          Policy({policy.id}) {policy.location}:
+                          <ul key={policy.type}>Type: {policy.type}</ul>
+                          <ul key={policy.premium}>
+                            Premium: {fixer((policy.premium / 100000) * 50)}
+                          </ul>
+                          <ul key={policy.coverage}>
+                            Coverage Start(12 Months):
+                            {format(new Date(policy.coverage), dateFormat)}
+                          </ul>
+                          <hr className="my-4" />
+                        </li>
+                      ))}
+                    </ul>
+                    <hr className="my-4" />
+                    <button
+                      className="btn btn-lg btn-google btn-block text-uppercase"
+                      onClick={HomeButton}
+                    >
+                      Return
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

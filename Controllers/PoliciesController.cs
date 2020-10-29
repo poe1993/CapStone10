@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CapStone10.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CapStone10.Controllers
 {
@@ -38,11 +40,12 @@ namespace CapStone10.Controllers
         // Returns a list of all your Policies
         //
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<IEnumerable<Policy>>> GetPolicies()
         {
             // Uses the database context in `_context` to request all of the Policies, sort
             // them by row id and return them as a JSON array.
-            return await _context.Policies.OrderBy(row => row.Id).ToListAsync();
+            return await _context.Policies.Where(policy => policy.UserId == GetCurrentUserId()).OrderBy(row => row.Id).ToListAsync();
         }
 
         // GET: api/Policies/5
@@ -133,8 +136,11 @@ namespace CapStone10.Controllers
         // new values for the record.
         //
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Policy>> PostPolicy(Policy policy)
         {
+            policy.UserId = GetCurrentUserId();
+
             // Indicate to the database context we want to add this new record
             _context.Policies.Add(policy);
             await _context.SaveChangesAsync();

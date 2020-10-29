@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { getUser } from './auth'
+import { authHeader, getUser, isLoggedIn } from './auth'
 import { Header } from './Header'
 
 export function EditUserProfile() {
@@ -28,7 +28,7 @@ export function EditUserProfile() {
 
     const response = await fetch(`/api/Users/${user.id}`, {
       method: 'PUT',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(updatedUser),
     })
 
@@ -52,67 +52,71 @@ export function EditUserProfile() {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">Edit Profile</h5>
-                <form onSubmit={handleFormSubmit}>
-                  {errorMessage && <p>{errorMessage}</p>}
-                  <div className="form-label-group">
-                    <input
-                      type="name"
-                      id="inputName"
-                      className="form-control"
-                      name="name"
-                      placeholder="Full Name"
-                      required
-                      autoFocus
-                      value={updatedUser.name}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="password"
-                      id="inputPassword"
-                      className="form-control"
-                      name="password"
-                      placeholder="Password"
-                      required
-                      autoFocus
-                      value={updatedUser.password}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="email"
-                      id="inputEmail"
-                      className="form-control"
-                      placeholder="Email"
-                      name="email"
-                      required
-                      autoFocus
-                      value={updatedUser.email}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="telephone"
-                      id="inputTelephone"
-                      className="form-control"
-                      name="telephone"
-                      placeholder="Telephone #"
-                      required
-                      autoFocus
-                      value={updatedUser.telephone}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <button
-                    className="btn btn-lg btn-google btn-block text-uppercase"
-                    type="submit"
-                  >
-                    Edit Profile
-                  </button>
-                </form>
+                <hr className="my-4" />
+                {isLoggedIn() && (
+                  <form onSubmit={handleFormSubmit}>
+                    {errorMessage && <p>{errorMessage}</p>}
+                    <div className="form-label-group">
+                      <input
+                        type="name"
+                        id="inputName"
+                        className="form-control"
+                        name="name"
+                        placeholder="Full Name"
+                        required
+                        autoFocus
+                        value={updatedUser.name}
+                        onChange={handleStringFieldChange}
+                      />
+                    </div>
+                    <div className="form-label-group">
+                      <input
+                        type="password"
+                        id="inputPassword"
+                        className="form-control"
+                        name="password"
+                        placeholder="Password"
+                        required
+                        autoFocus
+                        value={updatedUser.password}
+                        onChange={handleStringFieldChange}
+                      />
+                    </div>
+                    <div className="form-label-group">
+                      <input
+                        type="email"
+                        id="inputEmail"
+                        className="form-control"
+                        placeholder="Email"
+                        name="email"
+                        required
+                        autoFocus
+                        value={updatedUser.email}
+                        onChange={handleStringFieldChange}
+                      />
+                    </div>
+                    <div className="form-label-group">
+                      <input
+                        type="telephone"
+                        id="inputTelephone"
+                        className="form-control"
+                        name="telephone"
+                        placeholder="Telephone #"
+                        required
+                        autoFocus
+                        value={updatedUser.telephone}
+                        onChange={handleStringFieldChange}
+                      />
+                    </div>
+                    <hr className="my-4" />
+                    <button
+                      className="btn btn-lg btn-google btn-block text-uppercase"
+                      type="submit"
+                    >
+                      Edit Profile
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { getUser } from './auth'
+import { getUser, isLoggedIn } from './auth'
 import { Header } from './Header'
 
 export function UpdatePolicyForm() {
@@ -58,57 +58,59 @@ export function UpdatePolicyForm() {
           <div className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Update Policy Form</h5>
-              <form onSubmit={handleFormSubmit}>
-                {errorMessage && <p>{errorMessage}</p>}
-                <div className="form-label-group">
-                  <input
-                    type="location"
-                    id="inputLocation"
-                    placeholder="Location"
-                    className="form-control"
-                    required
-                    autoFocus
-                    name="location"
-                    value={policy.location}
-                    onChange={handleStringFieldChange}
-                  />
-                </div>
-                <select
-                  onInput={handleStringFieldChange}
-                  className="select"
-                  name="type"
-                  id="type"
-                >
-                  <optgroup
-                    label="Pick your policy"
-                    onChange={handleStringFieldChange}
+              {isLoggedIn() && (
+                <form onSubmit={handleFormSubmit}>
+                  {errorMessage && <p>{errorMessage}</p>}
+                  <div className="form-label-group">
+                    <input
+                      type="location"
+                      id="inputLocation"
+                      placeholder="Location"
+                      className="form-control"
+                      required
+                      autoFocus
+                      name="location"
+                      value={policy.location}
+                      onChange={handleStringFieldChange}
+                    />
+                  </div>
+                  <select
+                    onInput={handleStringFieldChange}
+                    className="select"
+                    name="type"
+                    id="type"
                   >
-                    <option value="HO-3">HO-3(Basic)</option>
-                    <option value="HO-5">HO-5(Advanced)</option>
-                    <option value="HO-8">HO-7(Premium)</option>
-                  </optgroup>
-                </select>
-                <div className="form-label-group">
-                  <input
-                    type="premium"
-                    name="premium"
-                    placeholder="Estimated Home Value $"
-                    className="form-control"
-                    required
-                    autoFocus
-                    value={policy.premium}
-                    onChange={handlePremium}
-                  />
-                </div>
-                <p>
-                  <button
-                    className="btn btn-lg btn-google btn-block text-uppercase"
-                    type="submit"
-                  >
-                    Update
-                  </button>
-                </p>
-              </form>
+                    <optgroup
+                      label="Pick your policy"
+                      onChange={handleStringFieldChange}
+                    >
+                      <option value="HO-3">HO-3(Basic)</option>
+                      <option value="HO-5">HO-5(Advanced)</option>
+                      <option value="HO-8">HO-7(Premium)</option>
+                    </optgroup>
+                  </select>
+                  <div className="form-label-group">
+                    <input
+                      type="premium"
+                      name="premium"
+                      placeholder="Estimated Home Value $"
+                      className="form-control"
+                      required
+                      autoFocus
+                      value={policy.premium}
+                      onChange={handlePremium}
+                    />
+                  </div>
+                  <p>
+                    <button
+                      className="btn btn-lg btn-google btn-block text-uppercase"
+                      type="submit"
+                    >
+                      Update
+                    </button>
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>

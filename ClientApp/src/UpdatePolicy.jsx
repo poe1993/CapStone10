@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getUser } from './auth'
+import { getUser, isLoggedIn } from './auth'
 import { Header } from './Header'
 
 export function UpdatePolicy() {
@@ -26,26 +26,28 @@ export function UpdatePolicy() {
                 <h5 className="card-title text-center">
                   Which policy would you like to update?
                   <hr className="my-4" />
-                  <form>
-                    <ul>
-                      {policies.map((policy) => (
-                        <ul>
-                          <label className="container" key={policy}>
-                            Policy {policy.location}
-                            <input type="radio" />
-                            <span className="checkmark"></span>
-                          </label>
-                        </ul>
-                      ))}
-                      <hr className="my-4" />
-                      <button
-                        className="btn btn-lg btn-google btn-block text-uppercase"
-                        type="submit"
-                      >
-                        Submit
-                      </button>
-                    </ul>
-                  </form>
+                  {isLoggedIn() && (
+                    <form>
+                      <ul>
+                        {policies.map((policy) => (
+                          <ul>
+                            <label className="container" key={policy}>
+                              Policy {policy.location}
+                              <input type="radio" />
+                              <span className="checkmark"></span>
+                            </label>
+                          </ul>
+                        ))}
+                        <hr className="my-4" />
+                        <button
+                          className="btn btn-lg btn-google btn-block text-uppercase"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      </ul>
+                    </form>
+                  )}
                 </h5>
               </div>
             </div>

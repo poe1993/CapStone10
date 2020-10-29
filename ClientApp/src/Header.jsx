@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { isLoggedIn } from './auth'
 
 export function Header() {
   return (
@@ -15,16 +16,12 @@ export function Header() {
                 />
               </li>
             </div>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
+            <li>{isLoggedIn() && <Link to="/home">Home</Link>}</li>
           </ul>
         </nav>
         <nav>
           <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+            <li>{isLoggedIn() && <Link to="/profile">Profile</Link>}</li>
           </ul>
         </nav>
       </header>

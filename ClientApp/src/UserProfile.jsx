@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUser } from './auth'
+import { getUser, isLoggedIn } from './auth'
 import { Header } from './Header'
 
 export function UserProfile() {
@@ -18,18 +18,20 @@ export function UserProfile() {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">Your Profile</h5>
+                {isLoggedIn && <hr className="my-4" />}
+                {isLoggedIn() && <ul>Name: {user.name}</ul>}
+                {isLoggedIn() && <ul>Email: {user.email}</ul>}
+                {isLoggedIn() && <ul>Telephone: {user.telephone}</ul>}
                 <hr className="my-4" />
-                <ul>Name: {user.name}</ul>
-                <ul>Email: {user.email}</ul>
-                <ul>Telephone: {user.telephone}</ul>
-                <hr className="my-4" />
-                <button
-                  className="btn btn-lg btn-google btn-block text-uppercase"
-                  type="submit"
-                  onClick={handleProfileEdit}
-                >
-                  Edit Profile
-                </button>
+                {isLoggedIn() && (
+                  <button
+                    className="btn btn-lg btn-google btn-block text-uppercase"
+                    type="submit"
+                    onClick={handleProfileEdit}
+                  >
+                    Edit Profile
+                  </button>
+                )}
               </div>
             </div>
           </div>
