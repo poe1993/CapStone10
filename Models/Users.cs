@@ -15,6 +15,8 @@ namespace CapStone10.Models
         [Required]
         public string Telephone { get; set; }
 
+        public string PhotoURL { get; set; }
+
         [JsonIgnore]
         public string HashedPassword { get; set; }
         // Define a property for being able to _set_ a password

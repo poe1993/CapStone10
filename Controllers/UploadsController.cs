@@ -21,7 +21,6 @@ namespace CapStone10.Controllers
         private readonly string CLOUDINARY_API_SECRET;
         // Constructor that receives a reference to your database context
         // and stores it in _context for you to use in your API methods
-
         private readonly HashSet<string> VALID_CONTENT_TYPES = new HashSet<string> {
     "image/jpg",
     "image/jpeg",
@@ -29,7 +28,7 @@ namespace CapStone10.Controllers
     "image/gif",
     "image/x-png",
     "image/png",
-};
+    };
 
         public UploadsController(IConfiguration config)
         {
@@ -48,7 +47,6 @@ namespace CapStone10.Controllers
         // new values for the record.
         //
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [RequestSizeLimit(10_000_000)]
         public async System.Threading.Tasks.Task<ActionResult> UploadAsync(IFormFile file)
         {

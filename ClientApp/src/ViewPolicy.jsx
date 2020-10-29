@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { authHeader, getUser } from './auth'
 import { Header } from './Header'
 import format from 'date-fns/format'
+import { Link } from 'react-router-dom'
 
 export function ViewPolicy() {
   const dateFormat = `EEEE, MMMM do, yyyy 'at' h:mm aaa`
@@ -59,11 +60,13 @@ export function ViewPolicy() {
                         Policy {policy.location}:
                         <ul key={policy.type}>Type: {policy.type}</ul>
                         <ul key={policy.premium}>
-                          Premium: {fixer((policy.premium / 100000) * 50)}
+                          Premium: ${fixer((policy.premium / 100000) * 50)}
                         </ul>
                         <ul key={policy.coverage}>
                           Coverage Start(12 Months):
-                          {format(new Date(policy.coverage), dateFormat)}
+                          <ul>
+                            {format(new Date(policy.coverage), dateFormat)}
+                          </ul>
                         </ul>
                         {policy.userId === user.id && (
                           <div>
@@ -79,9 +82,9 @@ export function ViewPolicy() {
                         )}
                         {policy.userId === user.id && (
                           <div>
-                            <button className="small" onClick={handleUpdate}>
-                              Update
-                            </button>
+                            <Link to={`/editpolicy/${policy.id}`}>
+                              <button className="small">Update</button>
+                            </Link>
                           </div>
                         )}
                         <hr className="my-4" />

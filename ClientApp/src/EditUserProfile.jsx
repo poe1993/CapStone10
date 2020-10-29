@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { authHeader, getUser } from './auth'
 import { Header } from './Header'
+import { useDropzone } from 'react-dropzone'
 
 export function EditUserProfile() {
   const history = useHistory()

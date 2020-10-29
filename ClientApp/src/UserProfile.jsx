@@ -1,6 +1,7 @@
 import React from 'react'
 import { getUser } from './auth'
 import { Header } from './Header'
+import { useDropzone } from 'react-dropzone'
 
 export function UserProfile() {
   const user = getUser()
@@ -20,7 +21,7 @@ export function UserProfile() {
                 <h5 className="card-title text-center">Your Profile</h5>
                 <hr className="my-4" />
                 <ul>Name: {user.name}</ul>
-                <ul>Email: {user.email}</ul>}
+                <ul>Email: {user.email}</ul>
                 <ul>Telephone: {user.telephone}</ul>
                 <hr className="my-4" />
                 <button

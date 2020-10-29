@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUser, isLoggedIn, logout } from './auth'
+import { getUser, logout } from './auth'
 import { Header } from './Header'
 
 export function Home() {
@@ -26,9 +26,18 @@ export function Home() {
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card card-signin my-5">
               <div className="card-body">
+                {user.photoURL && (
+                  <img
+                    className="user"
+                    alt="User Photo"
+                    width={200}
+                    src={user.photoURL}
+                  />
+                )}
                 <h5 className="card-title text-center">
                   Welcome, {user.name}!
                 </h5>
+                <hr className="my-4" />
                 <button
                   className="btn btn-lg btn-primary btn-block text-uppercase"
                   onClick={YourPolicies}

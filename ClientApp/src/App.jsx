@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useParams } from 'react-router-dom'
 import './custom.scss'
 import { SignIn } from './SignIn'
 import { SignUp } from './SignUp'
@@ -20,7 +20,7 @@ export function App() {
       {isLoggedIn() && <Route exact path="/view" component={ViewPolicy} />}
       {isLoggedIn() && <Route exact path="/new" component={NewPolicy} />}
       {isLoggedIn() && (
-        <Route exact path="/update" component={UpdatePolicyForm} />
+        <Route exact path="/editpolicy/:id" component={UpdatePolicyForm} />
       )}
       {isLoggedIn() && <Route exact path="/profile" component={UserProfile} />}
       {isLoggedIn() && <Route exact path="/edit" component={EditUserProfile} />}

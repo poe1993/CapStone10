@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { authHeader, getUser } from './auth'
 import { Header } from './Header'
 
 export function UpdatePolicyForm() {
   const history = useHistory()
   const user = getUser()
+
+  const params = useParams()
+  const id = params.id
+
   const [errorMessage, setErrorMessage] = useState()
   const [policy, setPolicy] = useState({
-    location: user.location,
-    type: user.type,
+    location: '',
+    type: '',
     premium: 0.0,
     userId: user.Id,
   })
 
-  async function loadPolicy(userId) {
-    const response = await fetch(`/api/policies/${userId}`, {
-      headers: { 'content-type': 'application/json', ...authHeader() },
-    })
-    const json = await response.json()
-    setPolicy(json)
+  useEffect(() => {
+    fetchPolicies()
+  }, [id])
+  const fetchPolicies = async () => {
+    const response = await fetch(`/api/policies/${id}`)
+    const apiData = await response.json()
+    setPolicy(apiData)
   }
-
-  useEffect(function () {
-    loadPolicy()
-  }, [])
 
   function handleStringFieldChange(event) {
     const value = event.target.value
@@ -46,7 +47,7 @@ export function UpdatePolicyForm() {
   async function handleFormSubmit(event) {
     event.preventDefault()
 
-    const response = await fetch(`/api/Policies/${policy.userId}`, {
+    const response = await fetch(`/api/Policies/${id}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(policy),

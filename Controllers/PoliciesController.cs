@@ -86,6 +86,19 @@ namespace CapStone10.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPolicy(int id, Policy policy)
         {
+
+            var policiesBelongsToUser = await _context.Policies.AnyAsync(policy => policy.Id == id && policy.UserId == GetCurrentUserId());
+            if (!policiesBelongsToUser)
+            {
+                // Make a custom error response
+                var response = new
+                {
+                    status = 401,
+                    errors = new List<string>() { "Not Authorized" }
+                };
+                // Return our error with the custom response
+                return Unauthorized(response);
+            }
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
             if (id != policy.Id)
             {
