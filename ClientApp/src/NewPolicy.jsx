@@ -110,7 +110,7 @@ export function NewPolicy() {
                       className="btn btn-lg btn-google btn-block text-uppercase"
                       type="submit"
                     >
-                      Get Estimate
+                      Create Policy
                     </button>
                   </p>
                 </form>

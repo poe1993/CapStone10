@@ -18,6 +18,14 @@ export function UserProfile() {
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card card-signin my-5">
               <div className="card-body">
+                {user.photoURL && (
+                  <img
+                    className="user"
+                    alt="User Photo"
+                    width={200}
+                    src={user.photoURL}
+                  />
+                )}
                 <h5 className="card-title text-center">Your Profile</h5>
                 <hr className="my-4" />
                 <ul>Name: {user.name}</ul>

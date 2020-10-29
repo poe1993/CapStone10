@@ -14,15 +14,16 @@ export function UpdatePolicyForm() {
   const [policy, setPolicy] = useState({
     location: '',
     type: '',
-    premium: 0.0,
-    userId: user.Id,
+    premium: '',
   })
 
   useEffect(() => {
     fetchPolicies()
   }, [id])
   const fetchPolicies = async () => {
-    const response = await fetch(`/api/policies/${id}`)
+    const response = await fetch(`/api/policies/${id}`, {
+      headers: { 'content-type': 'application/json', ...authHeader() },
+    })
     const apiData = await response.json()
     setPolicy(apiData)
   }
@@ -52,17 +53,10 @@ export function UpdatePolicyForm() {
       headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(policy),
     })
-
-    const apiResponse = await response.json()
-
-    console.log(apiResponse)
-
-    if (apiResponse.status === 400) {
-      setErrorMessage(Object.values(apiResponse.errors).join(' '))
-    } else {
-      history.push('/home')
-    }
+    console.log(policy)
+    history.push('/home')
   }
+
   return (
     <div className="container">
       <Header />

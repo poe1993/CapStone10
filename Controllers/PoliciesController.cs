@@ -84,6 +84,7 @@ namespace CapStone10.Controllers
         // new values for the record.
         //
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PutPolicy(int id, Policy policy)
         {
 
@@ -137,7 +138,7 @@ namespace CapStone10.Controllers
             //
             // return Ok(policy)
             //
-            return NoContent();
+            return Ok(policy);
         }
 
         // POST: api/Policies
