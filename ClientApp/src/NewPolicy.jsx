@@ -35,6 +35,11 @@ export function NewPolicy() {
   async function handleFormSubmit(event) {
     event.preventDefault()
 
+    if (newPolicy.premium <= 100000) {
+      window.alert('Please eneter a value greater than 100000')
+      return
+    }
+
     const response = await fetch('/api/Policies', {
       method: 'POST',
       headers: { 'content-type': 'application/json', ...authHeader() },

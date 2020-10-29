@@ -28,41 +28,6 @@ namespace CapStone10l.Controllers
             _context = context;
         }
 
-        // GET: api/Users
-        //
-        // Returns a list of all your Users
-        //
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {
-            // Uses the database context in `_context` to request all of the Users, sort
-            // them by row id and return them as a JSON array.
-            return await _context.Users.OrderBy(row => row.Id).ToListAsync();
-        }
-
-        // GET: api/Users/5
-        //
-        // Fetches and returns a specific user by finding it by id. The id is specified in the
-        // URL. In the sample URL above it is the `5`.  The "{id}" in the [HttpGet("{id}")] is what tells dotnet
-        // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
-        //
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            // Find the user in the database using `FindAsync` to look it up by id
-            var user = await _context.Users.FindAsync(id);
-
-            // If we didn't find anything, we receive a `null` in return
-            if (user == null)
-            {
-                // Return a `404` response to the client indicating we could not find a user with this id
-                return NotFound();
-            }
-
-            //  Return the user as a JSON object.
-            return user;
-        }
-
         // PUT: api/Users/5
         //
         // Update an individual user with the requested id. The id is specified in the URL
@@ -168,31 +133,6 @@ namespace CapStone10l.Controllers
         // In the sample URL above it is the `5`. The "{id} in the [HttpDelete("{id}")] is what tells dotnet
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            // Find this user by looking for the specific id
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                // There wasn't a user with that id so return a `404` not found
-                return NotFound();
-            }
-
-            // Tell the database we want to remove this record
-            _context.Users.Remove(user);
-
-            // Tell the database to perform the deletion
-            await _context.SaveChangesAsync();
-
-            // return NoContent to indicate the update was done. Alternatively you can use the
-            // following to send back a copy of the deleted data.
-            //
-            // return Ok(user)
-            //
-            return NoContent();
-        }
-
         // Private helper method that looks up an existing user by the supplied id
         private bool UserExists(int id)
         {

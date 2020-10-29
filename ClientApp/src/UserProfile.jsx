@@ -1,7 +1,6 @@
 import React from 'react'
 import { getUser } from './auth'
 import { Header } from './Header'
-import { useDropzone } from 'react-dropzone'
 
 export function UserProfile() {
   const user = getUser()
@@ -21,7 +20,7 @@ export function UserProfile() {
                 {user.photoURL && (
                   <img
                     className="user"
-                    alt="User Photo"
+                    alt=""
                     width={200}
                     src={user.photoURL}
                   />

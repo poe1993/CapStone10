@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { authHeader, getUser } from './auth'
+import { authHeader, getUser, updateUserAuth } from './auth'
 import { Header } from './Header'
 import { useDropzone } from 'react-dropzone'
 
@@ -14,7 +14,7 @@ export function EditUserProfile() {
     name: user?.name,
     email: user?.email,
     telephone: user?.telephone,
-    password: user?.password,
+    password: '',
     photoURL: user?.photoURL,
   })
 
@@ -92,7 +92,9 @@ export function EditUserProfile() {
     if (apiResponse.status === 400) {
       setErrorMessage(Object.values(apiResponse.errors).join(' '))
     } else {
-      history.push('/profile')
+      console.log(updatedUser)
+      updateUserAuth(updatedUser)
+      history.push('/home')
     }
   }
 
@@ -112,7 +114,7 @@ export function EditUserProfile() {
                     {updatedUser.photoURL && (
                       <p>
                         <img
-                          alt="User Photo"
+                          alt=""
                           className="user"
                           width={200}
                           src={updatedUser.photoURL}

@@ -108,7 +108,7 @@ export function SignUp() {
                   {newUser.photoURL && (
                     <p>
                       <img
-                        alt="User Photo"
+                        alt=""
                         className="user"
                         width={200}
                         src={newUser.photoURL}

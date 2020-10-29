@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { authHeader, getUser } from './auth'
+import { authHeader } from './auth'
 import { Header } from './Header'
 
 export function UpdatePolicyForm() {
   const history = useHistory()
-  const user = getUser()
 
   const params = useParams()
   const id = params.id
 
-  const [errorMessage, setErrorMessage] = useState()
   const [policy, setPolicy] = useState({
     location: '',
     type: '',
@@ -18,15 +16,15 @@ export function UpdatePolicyForm() {
   })
 
   useEffect(() => {
-    fetchPolicies()
+    const fetchPolicy = async () => {
+      const response = await fetch(`/api/policies/${id}`, {
+        headers: { 'content-type': 'application/json', ...authHeader() },
+      })
+      const apiData = await response.json()
+      setPolicy(apiData)
+    }
+    fetchPolicy()
   }, [id])
-  const fetchPolicies = async () => {
-    const response = await fetch(`/api/policies/${id}`, {
-      headers: { 'content-type': 'application/json', ...authHeader() },
-    })
-    const apiData = await response.json()
-    setPolicy(apiData)
-  }
 
   function handleStringFieldChange(event) {
     const value = event.target.value
@@ -54,6 +52,7 @@ export function UpdatePolicyForm() {
       body: JSON.stringify(policy),
     })
     console.log(policy)
+    console.log(response)
     history.push('/home')
   }
 
@@ -66,7 +65,6 @@ export function UpdatePolicyForm() {
             <div className="card-body">
               <h5 className="card-title text-center">Update Policy Form</h5>
               <form onSubmit={handleFormSubmit}>
-                {errorMessage && <p>{errorMessage}</p>}
                 <div className="form-label-group">
                   <input
                     type="location"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, useParams } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import './custom.scss'
 import { SignIn } from './SignIn'
 import { SignUp } from './SignUp'

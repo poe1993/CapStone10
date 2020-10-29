@@ -14,10 +14,6 @@ export function ViewPolicy() {
     window.location.assign('/home')
   }
 
-  function handleUpdate() {
-    window.location.assign('/update')
-  }
-
   async function loadPolicies() {
     const response = await fetch('/api/policies', {
       headers: { 'content-type': 'application/json', ...authHeader() },

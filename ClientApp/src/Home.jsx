@@ -29,7 +29,7 @@ export function Home() {
                 {user.photoURL && (
                   <img
                     className="user"
-                    alt="User Photo"
+                    alt=""
                     width={200}
                     src={user.photoURL}
                   />
