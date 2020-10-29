@@ -27,9 +27,11 @@ export function UserProfile() {
                 )}
                 <h5 className="card-title text-center">Your Profile</h5>
                 <hr className="my-4" />
-                <ul>Name: {user.name}</ul>
-                <ul>Email: {user.email}</ul>
-                <ul>Telephone: {user.telephone}</ul>
+                <ul>
+                  <li>Name: {user.name}</li>
+                  <li>Email: {user.email}</li>
+                  <li>Telephone: {user.telephone}</li>
+                </ul>
                 <hr className="my-4" />
                 <button
                   className="btn btn-lg btn-google btn-block text-uppercase"

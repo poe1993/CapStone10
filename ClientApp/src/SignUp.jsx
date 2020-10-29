@@ -58,12 +58,12 @@ export function SignUp() {
     }
   }
 
-  let dropZoneMessage = 'Drag a picture of the user here to upload!'
+  let dropZoneMessage = 'Drag a picture!'
   if (isUploading) {
     dropZoneMessage = 'Uploading...'
   }
   if (isDragActive) {
-    dropZoneMessage = 'Drop the files here ...'
+    dropZoneMessage = 'Drop file here'
   }
 
   function handleStringFieldChange(event) {
@@ -102,10 +102,11 @@ export function SignUp() {
           <div className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Sign Up</h5>
+              <hr className="my-4" />
               <form onSubmit={handleFormSubmit}>
                 {errorMessage && <p>{errorMessage}</p>}
                 <div className="form-label-group">
-                  {newUser.photoURL && (
+                  {newUser.photoURL ? (
                     <p>
                       <img
                         alt=""
@@ -114,13 +115,17 @@ export function SignUp() {
                         src={newUser.photoURL}
                       />
                     </p>
-                  )}
-                  <div className="file-drop-zone">
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      {dropZoneMessage}
+                  ) : (
+                    <div className="file-drop-zone">
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {dropZoneMessage}
+                      </div>
                     </div>
-                  </div>
+                  )}
+                </div>
+                <hr className="my-4" />
+                <div className="form-label-group">
                   <input
                     type="name"
                     id="inputName"
