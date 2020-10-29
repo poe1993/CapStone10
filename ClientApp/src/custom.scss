@@ -140,6 +140,13 @@ body {
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
+.logo {
+  width: 7rem;
+  height: 7rem;
+  position: relative;
+  margin-left: 6rem;
+}
+
 .form-label-group > label {
   position: absolute;
   top: 0;

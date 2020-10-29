@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { getUser, getUserId } from './auth'
+import { useHistory, useParams } from 'react-router-dom'
+import { authHeader, getUser, getUserId } from './auth'
 import { Header } from './Header'
 
 export function DeletePolicy() {
   const [policies, setPolicies] = useState([])
+  const history = useHistory()
   const user = getUserId()
 
-  useEffect(function () {
-    const user = getUser()
-    async function loadPolicies() {
-      const response = await fetch('/api/policies')
-      const json = await response.json()
-      setPolicies(json)
-    }
-    loadPolicies()
-  }, [])
-
   return (
-    <body>
+    <div>
       <Header />
       <div className="container">
         <div className="row">
@@ -53,6 +45,6 @@ export function DeletePolicy() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }

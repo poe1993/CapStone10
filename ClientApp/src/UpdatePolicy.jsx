@@ -16,7 +16,7 @@ export function UpdatePolicy() {
   }, [])
 
   return (
-    <body>
+    <div>
       <Header />
       <div className="container">
         <div className="row">
@@ -52,6 +52,6 @@ export function UpdatePolicy() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }

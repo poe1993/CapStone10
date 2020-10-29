@@ -26,6 +26,13 @@ namespace CapStone10.Controllers
             _context = context;
         }
 
+
+        private int GetCurrentUserId()
+        {
+            // Get the User Id from the claim and then parse it as an integer.
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
+        }
+
         // GET: api/Policies
         //
         // Returns a list of all your Policies

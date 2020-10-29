@@ -43,79 +43,77 @@ export function SignUp() {
   }
 
   return (
-    <body>
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div className="card card-signin my-5">
-              <div className="card-body">
-                <h5 className="card-title text-center">Sign Up</h5>
-                <form onSubmit={handleFormSubmit}>
-                  {errorMessage && <p>{errorMessage}</p>}
-                  <div className="form-label-group">
-                    <input
-                      type="name"
-                      id="inputName"
-                      className="form-control"
-                      name="name"
-                      placeholder="Full Name"
-                      required
-                      autoFocus
-                      value={newUser.name}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="password"
-                      id="inputPassword"
-                      className="form-control"
-                      name="password"
-                      placeholder="Password"
-                      required
-                      autoFocus
-                      value={newUser.password}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="email"
-                      id="inputEmail"
-                      className="form-control"
-                      placeholder="Email"
-                      name="email"
-                      required
-                      autoFocus
-                      value={newUser.email}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <div className="form-label-group">
-                    <input
-                      type="telephone"
-                      id="inputTelephone"
-                      className="form-control"
-                      name="telephone"
-                      placeholder="Telephone #"
-                      required
-                      autoFocus
-                      value={newUser.telephone}
-                      onChange={handleStringFieldChange}
-                    />
-                  </div>
-                  <button
-                    className="btn btn-lg btn-google btn-block text-uppercase"
-                    type="submit"
-                  >
-                    Sign Up!
-                  </button>
-                </form>
-              </div>
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div className="card card-signin my-5">
+            <div className="card-body">
+              <h5 className="card-title text-center">Sign Up</h5>
+              <form onSubmit={handleFormSubmit}>
+                {errorMessage && <p>{errorMessage}</p>}
+                <div className="form-label-group">
+                  <input
+                    type="name"
+                    id="inputName"
+                    className="form-control"
+                    name="name"
+                    placeholder="Full Name"
+                    required
+                    autoFocus
+                    value={newUser.name}
+                    onChange={handleStringFieldChange}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <input
+                    type="password"
+                    id="inputPassword"
+                    className="form-control"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    autoFocus
+                    value={newUser.password}
+                    onChange={handleStringFieldChange}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <input
+                    type="email"
+                    id="inputEmail"
+                    className="form-control"
+                    placeholder="Email"
+                    name="email"
+                    required
+                    autoFocus
+                    value={newUser.email}
+                    onChange={handleStringFieldChange}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <input
+                    type="telephone"
+                    id="inputTelephone"
+                    className="form-control"
+                    name="telephone"
+                    placeholder="Telephone #"
+                    required
+                    autoFocus
+                    value={newUser.telephone}
+                    onChange={handleStringFieldChange}
+                  />
+                </div>
+                <button
+                  className="btn btn-lg btn-google btn-block text-uppercase"
+                  type="submit"
+                >
+                  Sign Up!
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }

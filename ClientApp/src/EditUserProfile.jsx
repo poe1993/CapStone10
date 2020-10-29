@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { authHeader, getUser, updateUserAuth } from './auth'
+import { getUser } from './auth'
 import { Header } from './Header'
 
 export function EditUserProfile() {
@@ -44,7 +44,7 @@ export function EditUserProfile() {
   }
 
   return (
-    <body>
+    <div>
       <Header />
       <div className="container">
         <div className="row">
@@ -118,6 +118,6 @@ export function EditUserProfile() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }

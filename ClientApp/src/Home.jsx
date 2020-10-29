@@ -32,7 +32,7 @@ export function Home() {
   }
 
   return (
-    <body>
+    <div>
       <Header />
       <div className="container">
         <div className="row">
@@ -90,6 +90,6 @@ export function Home() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }

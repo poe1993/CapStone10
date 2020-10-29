@@ -57,7 +57,7 @@ export function NewPolicy() {
   }
 
   return (
-    <body>
+    <div>
       <Header />
       <div className="container">
         <div className="row">
@@ -121,6 +121,6 @@ export function NewPolicy() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   )
 }
