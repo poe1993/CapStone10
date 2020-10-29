@@ -27,6 +27,10 @@ export function Home() {
     window.location.assign('/view')
   }
 
+  function DeletePolicies() {
+    window.location.assign('/delete')
+  }
+
   return (
     <body>
       <Header />
@@ -67,7 +71,7 @@ export function Home() {
                 {isLoggedIn() && (
                   <button
                     className="btn btn-lg btn-primary btn-block text-uppercase"
-                    onClick={NewPolicyForm}
+                    onClick={DeletePolicies}
                   >
                     Delete Policy
                   </button>

@@ -9,6 +9,7 @@ export function EditUserProfile() {
   const user = getUser()
   const [errorMessage, setErrorMessage] = useState('')
   const [updatedUser, setUpdatedUser] = useState({
+    id: user.id,
     name: user.name,
     email: user.email,
     telephone: user.telephone,
@@ -25,7 +26,7 @@ export function EditUserProfile() {
   async function handleFormSubmit(event) {
     event.preventDefault()
 
-    const response = await fetch('/api/Users', {
+    const response = await fetch(`/api/Users/${user.id}`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(updatedUser),

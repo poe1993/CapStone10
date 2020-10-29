@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CapStone10.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CapStone10l.Controllers
 {
@@ -72,19 +74,29 @@ namespace CapStone10l.Controllers
         // supplies to the names of the attributes of our User POCO class. This represents the
         // new values for the record.
         //
+
+        private int GetCurrentUserId()
+        {
+            // Get the User Id from the claim and then parse it as an integer.
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
+        }
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> PutUser(int id, User User)
         {
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
-            if (id != user.Id)
+            if (id != User.Id)
             {
                 return BadRequest();
             }
-
-            // Tell the database to consider everything in user to be _updated_ values. When
-            // the save happens the database will _replace_ the values in the database with the ones from user
-            _context.Entry(user).State = EntityState.Modified;
-
+            if (id != GetCurrentUserId())
+            {
+                return BadRequest();
+            }
+            // Tell the database to consider everything in User to be _updated_ values. When
+            // the save happens the database will _replace_ the values in the database with the ones from User
+            _context.Entry(User).State = EntityState.Modified;
             try
             {
                 // Try to save these changes.
@@ -107,14 +119,14 @@ namespace CapStone10l.Controllers
                     throw;
                 }
             }
-
             // return NoContent to indicate the update was done. Alternatively you can use the
             // following to send back a copy of the updated data.
             //
-            // return Ok(user)
-            //
-            return NoContent();
+            return Ok(User);
         }
+        // Private helper method that looks up an existing User by the supplied id
+
+
 
         // POST: api/Users
         //
