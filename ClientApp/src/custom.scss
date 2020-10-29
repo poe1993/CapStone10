@@ -101,14 +101,14 @@ body {
 }
 
 .card-signin .card-title {
-  margin-bottom: 2rem;
+  margin-bottom: 0.1rem;
   font-weight: 300;
   font-size: 1.5rem;
 }
 
 .card-signin .card-body {
   padding: 2rem;
-  margin-top: 10px;
+  margin-top: 9px;
 }
 
 .form-signin {
@@ -140,11 +140,16 @@ body {
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
+.homebutton {
+  background-color: white;
+  color: rgb(19, 95, 196);
+}
+
 .logo {
   width: 7rem;
   height: 7rem;
   position: relative;
-  margin-left: 6rem;
+  margin-left: 8.4rem;
 }
 
 .form-label-group > label {
@@ -222,6 +227,11 @@ body {
 .btn-google {
   color: white;
   background-color: #ea4335;
+}
+
+.btn-policy {
+  color: white;
+  background-color: grey;
 }
 
 .select {

@@ -8,6 +8,16 @@ export function DeletePolicy() {
   const history = useHistory()
   const user = getUserId()
 
+  useEffect(function () {
+    const user = getUser()
+    async function loadPolicies() {
+      const response = await fetch('/api/policies')
+      const json = await response.json()
+      setPolicies(json)
+    }
+    loadPolicies()
+  }, [])
+
   return (
     <div>
       <Header />
@@ -19,26 +29,24 @@ export function DeletePolicy() {
                 <h5 className="card-title text-center">
                   Which Policy would you like to delete?
                   <hr className="my-4" />
-                  <form>
-                    <ul>
-                      {policies.map((policy) => (
-                        <li>
-                          <label className="container" key={policy}>
-                            Policy {policy.location}
-                            <input type="checkbox" />
-                            <span className="checkmark"></span>
-                          </label>
-                        </li>
-                      ))}
-                      <hr className="my-4" />
-                      <button
-                        className="btn btn-lg btn-google btn-block text-uppercase"
-                        type="submit"
-                      >
-                        Delete
-                      </button>
-                    </ul>
-                  </form>
+                  <ul>
+                    {policies.map((policy) => (
+                      <li>
+                        <label className="container" key={policy}>
+                          Policy({policy.id}) {policy.location}
+                          <input type="checkbox" />
+                          <span className="checkmark"></span>
+                        </label>
+                      </li>
+                    ))}
+                    <hr className="my-4" />
+                    <button
+                      className="btn btn-lg btn-google btn-block text-uppercase"
+                      type="submit"
+                    >
+                      Delete
+                    </button>
+                  </ul>
                 </h5>
               </div>
             </div>

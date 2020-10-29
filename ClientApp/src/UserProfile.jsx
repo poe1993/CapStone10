@@ -18,9 +18,11 @@ export function UserProfile() {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">Your Profile</h5>
+                <hr className="my-4" />
                 <ul>Name: {user.name}</ul>
                 <ul>Email: {user.email}</ul>
                 <ul>Telephone: {user.telephone}</ul>
+                <hr className="my-4" />
                 <button
                   className="btn btn-lg btn-google btn-block text-uppercase"
                   type="submit"

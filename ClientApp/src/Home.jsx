@@ -11,10 +11,6 @@ export function Home() {
     window.location.assign('/')
   }
 
-  function HomeButton() {
-    window.location.assign('/home')
-  }
-
   function NewPolicyForm() {
     window.location.assign('/new')
   }

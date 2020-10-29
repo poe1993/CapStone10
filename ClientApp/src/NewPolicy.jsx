@@ -65,6 +65,7 @@ export function NewPolicy() {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">New Policy Form</h5>
+                <hr className="my-4" />
                 <form onSubmit={handleFormSubmit}>
                   {errorMessage && <p>{errorMessage}</p>}
                   <div className="form-label-group">
@@ -97,9 +98,9 @@ export function NewPolicy() {
                   </select>
                   <div className="form-label-group">
                     <input
-                      type="premium"
+                      type="text"
                       name="premium"
-                      placeholder="Estimated Home Value $"
+                      placeholder="Estimated Home Value"
                       className="form-control"
                       required
                       autoFocus
@@ -107,6 +108,7 @@ export function NewPolicy() {
                       onChange={handlePremium}
                     />
                   </div>
+                  <hr className="my-4" />
                   <p>
                     <button
                       className="btn btn-lg btn-google btn-block text-uppercase"

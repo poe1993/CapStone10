@@ -24,18 +24,18 @@ export function UpdatePolicy() {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">
-                  Which Policy would you like to update?
+                  Which policy would you like to update?
                   <hr className="my-4" />
                   <form>
                     <ul>
                       {policies.map((policy) => (
-                        <li>
+                        <ul>
                           <label className="container" key={policy}>
                             Policy {policy.location}
-                            <input type="checkbox" />
+                            <input type="radio" />
                             <span className="checkmark"></span>
                           </label>
-                        </li>
+                        </ul>
                       ))}
                       <hr className="my-4" />
                       <button
