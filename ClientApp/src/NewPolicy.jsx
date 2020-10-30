@@ -36,7 +36,7 @@ export function NewPolicy() {
     event.preventDefault()
 
     if (newPolicy.premium <= 100000) {
-      window.alert('Please eneter a value greater than 100000')
+      window.alert('Please enter a value greater than 100000')
       return
     }
 

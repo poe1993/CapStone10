@@ -12,7 +12,7 @@ export function UpdatePolicyForm() {
   const [policy, setPolicy] = useState({
     location: '',
     type: '',
-    premium: '',
+    premium: 0.0,
   })
 
   useEffect(() => {
@@ -45,6 +45,11 @@ export function UpdatePolicyForm() {
 
   async function handleFormSubmit(event) {
     event.preventDefault()
+
+    if (policy.premium <= 100000) {
+      window.alert('Please enter a value greater than 100000')
+      return
+    }
 
     const response = await fetch(`/api/Policies/${id}`, {
       method: 'PUT',

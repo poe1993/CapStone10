@@ -111,7 +111,7 @@ export function EditUserProfile() {
                 <form onSubmit={handleFormSubmit}>
                   {errorMessage && <p>{errorMessage}</p>}
                   <div className="form-label-group">
-                    {updatedUser.photoURL && (
+                    {updatedUser.photoURL ? (
                       <p>
                         <img
                           alt=""
@@ -120,13 +120,16 @@ export function EditUserProfile() {
                           src={updatedUser.photoURL}
                         />
                       </p>
-                    )}
-                    <div className="file-drop-zone">
-                      <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        {dropZoneMessage}
+                    ) : (
+                      <div className="file-drop-zone">
+                        <div {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          {dropZoneMessage}
+                        </div>
                       </div>
-                    </div>
+                    )}
+                  </div>
+                  <div className="form-label-group">
                     <input
                       type="name"
                       id="inputName"
